@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>위수 협의 · 맹약 시뮬레이터 · 모바일 v1.0</title>
+	<title>Arknights Sim Mobile</title>
 	<style>
 :root {
 	--bg: #0b0d12;
@@ -5615,6 +5615,331 @@ body.mobile-edition .tool-empty-state {
 	body.mobile-edition .tool-order-toggle { min-height: 38px; }
 }
 
+
+
+/* ===== 모바일 v1.1 patch1: 변형 구성체 + 인사부 문서 ===== */
+body.mobile-edition .workspace-head {
+	grid-template-columns: minmax(0, 1fr) auto auto !important;
+	align-items: start !important;
+}
+body.mobile-edition .mobile-iso-quick {
+	align-self: start;
+	min-height: 34px;
+	padding: 5px 8px;
+	border: 1px solid rgba(240,211,106,.55);
+	border-radius: 9px;
+	background: rgba(240,211,106,.10);
+	color: #f8e99f;
+	font-size: 11px;
+	font-weight: 1000;
+	white-space: nowrap;
+	cursor: pointer;
+}
+body.mobile-edition .mobile-iso-quick:active {
+	background: rgba(240,211,106,.22);
+}
+body.mobile-edition .selected-hr-document-item {
+	border-color: rgba(240,211,106,.58) !important;
+	background: linear-gradient(180deg, rgba(240,211,106,.10), #11151c) !important;
+}
+body.mobile-edition .selected-hr-document-item .selected-operator-image img {
+	object-fit: contain !important;
+}
+body.mobile-edition .mobile-item-effect-tray {
+	margin: 0 0 7px;
+	padding: 7px;
+	border: 1px solid rgba(240,211,106,.34);
+	border-radius: 11px;
+	background: linear-gradient(180deg, rgba(240,211,106,.065), #0d1016);
+}
+body.mobile-edition .mobile-item-effect-tray[hidden] {
+	display: none !important;
+}
+body.mobile-edition .mobile-item-effect-head,
+body.mobile-edition .recipe-effect-strip-head {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 8px;
+	margin-bottom: 5px;
+}
+body.mobile-edition .mobile-item-effect-head strong,
+body.mobile-edition .recipe-effect-strip-head strong {
+	color: #f8e99f;
+	font-size: 12px;
+	font-weight: 1000;
+}
+body.mobile-edition .mobile-item-effect-head span,
+body.mobile-edition .recipe-effect-strip-head span {
+	color: var(--muted);
+	font-size: 9px;
+	font-weight: 800;
+}
+body.mobile-edition .mobile-item-effect-list {
+	display: flex;
+	gap: 6px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding: 1px 1px 3px;
+	scrollbar-width: none;
+}
+body.mobile-edition .mobile-item-effect-list::-webkit-scrollbar {
+	display: none;
+}
+body.mobile-edition .mobile-item-effect-card {
+	position: relative;
+	flex: 0 0 66px;
+	width: 66px;
+	padding: 3px 3px 5px;
+	border: 1px solid rgba(255,128,111,.78);
+	border-radius: 9px;
+	background: #11151c;
+	color: var(--text);
+	cursor: pointer;
+}
+body.mobile-edition .mobile-item-effect-image {
+	display: grid;
+	place-items: center;
+	width: 58px;
+	height: 54px;
+	margin: 0 auto 3px;
+	border: 2px solid var(--stage-6);
+	border-radius: 7px;
+	background: #090c11;
+	overflow: hidden;
+}
+body.mobile-edition .mobile-item-effect-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+body.mobile-edition .mobile-item-effect-card strong {
+	display: block;
+	overflow: hidden;
+	font-size: 9.5px;
+	font-weight: 1000;
+	line-height: 1.15;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+body.mobile-edition .mobile-effect-remove {
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	display: grid;
+	place-items: center;
+	width: 17px;
+	height: 17px;
+	border: 1px solid rgba(255,255,255,.22);
+	border-radius: 50%;
+	background: rgba(10,12,17,.9);
+	color: #ffb6bb;
+	font-size: 13px;
+	font-weight: 1000;
+}
+body.mobile-edition .mobile-tool-action {
+	width: 100%;
+	margin-top: 7px;
+	padding: 7px 8px;
+	border: 1px solid rgba(240,211,106,.46);
+	border-radius: 8px;
+	background: rgba(240,211,106,.08);
+	color: #f6df7e;
+	font-size: 11px;
+	font-weight: 1000;
+	cursor: pointer;
+}
+body.mobile-edition .mobile-tool-action.active {
+	border-color: rgba(101,210,155,.65);
+	background: rgba(101,210,155,.12);
+	color: #99ecc2;
+}
+body.mobile-edition .mobile-recipe-modal {
+	z-index: 90;
+}
+body.mobile-edition .recipe-modal-card {
+	display: flex;
+	flex-direction: column;
+	width: min(calc(100vw - 16px), 520px);
+	max-height: 92dvh;
+	padding: 11px;
+}
+body.mobile-edition .recipe-modal-head {
+	flex: 0 0 auto;
+	align-items: flex-start !important;
+	margin-bottom: 8px !important;
+}
+body.mobile-edition .recipe-modal-head p {
+	margin: 3px 0 0;
+	color: var(--muted);
+	font-size: 10px;
+	font-weight: 750;
+}
+body.mobile-edition .recipe-effect-strip {
+	flex: 0 0 auto;
+	margin-bottom: 8px;
+	padding: 7px;
+	border: 1px solid rgba(240,211,106,.34);
+	border-radius: 10px;
+	background: rgba(240,211,106,.055);
+}
+body.mobile-edition .recipe-effect-strip[hidden] {
+	display: none !important;
+}
+body.mobile-edition .mobile-recipe-grid {
+	min-height: 0;
+	overflow-y: auto;
+	padding-right: 2px;
+	scrollbar-color: #3f4857 transparent;
+}
+body.mobile-edition .recipe-group-label {
+	position: sticky;
+	top: 0;
+	z-index: 2;
+	margin: 5px 0 6px;
+	padding: 5px 8px;
+	border-radius: 7px;
+	background: #111720;
+	font-size: 11px;
+	font-weight: 1000;
+}
+body.mobile-edition .recipe-group-label.core { color: #f2d66f; }
+body.mobile-edition .recipe-group-label.support { color: #7ad3fa; }
+body.mobile-edition .mobile-recipe-item {
+	display: grid;
+	grid-template-columns: 48px minmax(0, 1fr);
+	gap: 9px;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 6px;
+	padding: 7px;
+	border: 1px solid #303846;
+	border-radius: 10px;
+	background: #11151c;
+	color: var(--text);
+	text-align: left;
+	cursor: pointer;
+}
+body.mobile-edition .mobile-recipe-item.active {
+	border-color: rgba(240,211,106,.72);
+	background: linear-gradient(90deg, rgba(240,211,106,.10), #11151c 55%);
+}
+body.mobile-edition .mobile-recipe-image {
+	display: grid;
+	place-items: center;
+	width: 48px;
+	height: 48px;
+	border: 2px solid var(--stage-color);
+	border-radius: 8px;
+	background: #090c11;
+	overflow: hidden;
+}
+body.mobile-edition .mobile-recipe-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+body.mobile-edition .mobile-recipe-copy {
+	min-width: 0;
+}
+body.mobile-edition .mobile-recipe-copy strong,
+body.mobile-edition .mobile-recipe-copy span {
+	display: block;
+}
+body.mobile-edition .mobile-recipe-copy strong {
+	font-size: 12px;
+	font-weight: 1000;
+	line-height: 1.3;
+}
+body.mobile-edition .mobile-recipe-copy span {
+	margin-top: 3px;
+	color: #f4db75;
+	font-size: 11px;
+	font-weight: 900;
+}
+@media (max-width: 380px) {
+	body.mobile-edition .workspace-head {
+		grid-template-columns: minmax(0, 1fr) auto !important;
+	}
+	body.mobile-edition .mobile-iso-quick {
+		grid-column: 1;
+		grid-row: 2;
+		justify-self: start;
+		min-height: 30px;
+		padding: 4px 7px;
+	}
+	body.mobile-edition .selection-summary {
+		grid-column: 2;
+		grid-row: 1 / 3;
+	}
+}
+
+
+
+/* ===== 모바일 v1.1 patch2: 퀵 액션 하단 배치 + 인사부 토글 ===== */
+body.mobile-edition .workspace-head {
+	display: block !important;
+	min-height: 0 !important;
+	margin-bottom: 4px !important;
+}
+body.mobile-edition .workspace-heading-copy {
+	width: 100% !important;
+}
+body.mobile-edition .mobile-sim-action-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 6px;
+	margin: 0 0 8px;
+	min-width: 0;
+}
+body.mobile-edition .mobile-sim-quick-actions {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	min-width: 0;
+}
+body.mobile-edition .mobile-sim-action-row .mobile-iso-quick {
+	align-self: center !important;
+	min-height: 34px !important;
+	padding: 5px 8px !important;
+	font-size: 11px !important;
+}
+body.mobile-edition .mobile-hr-quick.active {
+	border-color: rgba(101,210,155,.72) !important;
+	background: rgba(101,210,155,.14) !important;
+	color: #a4efc8 !important;
+}
+body.mobile-edition .mobile-sim-action-row .selection-summary {
+	display: flex !important;
+	align-items: center !important;
+	align-self: center !important;
+	margin: 0 !important;
+	min-height: 34px !important;
+	flex: 0 0 auto;
+}
+@media (max-width: 380px) {
+	body.mobile-edition .mobile-sim-action-row {
+		gap: 4px;
+	}
+	body.mobile-edition .mobile-sim-quick-actions {
+		gap: 4px;
+	}
+	body.mobile-edition .mobile-sim-action-row .mobile-iso-quick {
+		padding: 5px 6px !important;
+		font-size: 10px !important;
+	}
+	body.mobile-edition .mobile-sim-action-row .selection-summary {
+		padding-left: 6px !important;
+		padding-right: 4px !important;
+	}
+	body.mobile-edition .mobile-sim-action-row .selection-summary #reset-selection {
+		padding-left: 6px !important;
+		padding-right: 6px !important;
+	}
+}
+
 </style>
 </head>
 <body class="mobile-edition">
@@ -5627,7 +5952,7 @@ body.mobile-edition .tool-empty-state {
 		<header class="topbar">
 			<div class="brand">
 				<div>
-					<div class="mobile-brand-title"><h1>위수 협의</h1><span class="mobile-version-badge">모바일 v1.0</span></div>
+					<div class="mobile-brand-title"><h1>위수 협의</h1><span class="mobile-version-badge">모바일 v1.1</span></div>
 					<p>맹약 / 하반기 · 전체 23맹약 / 112오퍼레이터</p>
 				</div>
 			</div>
@@ -5677,9 +6002,16 @@ body.mobile-edition .tool-empty-state {
 									</div>
 								</div>
 							</div>
+						</div>
+
+						<div class="mobile-sim-action-row">
+							<div class="mobile-sim-quick-actions">
+								<button id="sim-open-isomorphic" class="mobile-iso-quick" type="button">변형체 +</button>
+								<button id="sim-toggle-hr" class="mobile-iso-quick mobile-hr-quick" type="button" aria-pressed="false">인사부 +</button>
+							</div>
 							<div class="selection-summary">
 								<span class="selected-label">선택</span>
-								<strong id="selected-count">0</strong><span>/ 8</span>
+								<strong id="selected-count">0</strong><span id="selected-limit">/ 8</span>
 								<button id="reset-selection" class="danger-button" type="button">전체 초기화</button>
 							</div>
 						</div>
@@ -5696,6 +6028,14 @@ body.mobile-edition .tool-empty-state {
 								<span>이미지를 누르면 바로 선택 해제</span>
 							</div>
 							<div id="selected-operator-list" class="selected-operator-list"></div>
+						</div>
+
+						<div id="item-effect-tray" class="mobile-item-effect-tray" hidden>
+							<div class="mobile-item-effect-head">
+								<strong>변형체 효과</strong>
+								<span id="item-effect-count">0/9 · 탭하면 제거</span>
+							</div>
+							<div id="item-effect-list" class="mobile-item-effect-list"></div>
 						</div>
 
 						<div class="filter-panel">
@@ -5796,6 +6136,25 @@ body.mobile-edition .tool-empty-state {
 			</section>
 		</main>
 	</div>
+
+
+	<section id="isomorphic-recipe-modal" class="mobile-modal mobile-recipe-modal" aria-hidden="true">
+		<div class="mobile-modal-card recipe-modal-card">
+			<div class="panel-title-row mobile-modal-head recipe-modal-head">
+				<div>
+					<span class="eyebrow">TOOL COMBINATION</span>
+					<h2>변형 구성체 조합법</h2>
+					<p>아이템을 탭하면 맹약 +1 · 최대 9개</p>
+				</div>
+				<button id="isomorphic-recipe-close" class="back-button" type="button">닫기</button>
+			</div>
+			<div id="isomorphic-recipe-effect-strip" class="recipe-effect-strip" hidden>
+				<div class="recipe-effect-strip-head"><strong>적용 중</strong><span>탭하면 제거</span></div>
+				<div id="isomorphic-recipe-effect-list" class="mobile-item-effect-list"></div>
+			</div>
+			<div id="isomorphic-recipe-grid" class="mobile-recipe-grid"></div>
+		</div>
+	</section>
 
 	<section id="ban-modal" class="ban-modal" aria-hidden="true">
 		<div class="ban-screen">
@@ -8151,6 +8510,7 @@ const tools = [
 	{ id: 'riot-shield', name: '진압 방패', stage: 4, effect: '◇ 적 저지 시 자신이 저지하지 않은 유닛으로부터 받는 피해 40% 감소<br>◆ 적 저지 시 자신이 저지하지 않은 유닛으로부터 받는 피해 70% 감소', image: 'https://images.weserv.nl/?url=arknights1234.github.io/images/%E5%8D%AB%E6%88%8D%E5%8D%8F%E8%AE%AE_%E9%81%93%E5%85%B7_%E9%98%B2%E6%9A%B4%E7%9B%BE.png&output=webp' },
 	{ id: 'sleeping-descendant', name: '잠자는 후예', stage: 4, effect: '◇ 목표를 1개 공격할 때마다 최대 체력의 2% 회복<br>◆ 목표를 1개 공격할 때마다 최대 체력의 4% 회복', image: 'https://images.weserv.nl/?url=arknights1234.github.io/images/%E5%8D%AB%E6%88%8D%E5%8D%8F%E8%AE%AE_%E9%81%93%E5%85%B7_%E4%BC%91%E7%9C%A0%E5%AD%90%E8%A3%94.png&output=webp' },
 	{ id: 'kazimierz-flag', name: '카시미어 경기 깃발', stage: 4, effect: '배치 후 15초 동안 입히는 피해량이 135(160)%로 상승하며, 이후 점차 감소함', image: 'https://images.weserv.nl/?url=arknights1234.github.io/images/%EC%B9%B4%EC%8B%9C%EB%AF%B8%EC%96%B4%EA%B2%BD%EA%B8%B0%EA%B9%83%EB%B0%9C.png&output=webp' },
+	{ id: 'laterano-clip', name: '라테라노 클립', stage: 4, effect: '◇ 탄약류 스킬이 탄약 1발이 남을 경우, 50% 확률로 탄약 40% 회복 (배치할 때마다 최대 3회 발동)<br>◆ 탄약류 스킬이 탄약 1발이 남을 경우, 60% 확률로 탄약 60% 회복 (배치할 때마다 최대 3회 발동)', image: 'https://i.namu.wiki/i/Du1-WPnBwaF0K4WUwtKWOUwkPwYg0zMJ5foaiOgjrhjuH0nxiafV32LQ96VOgBx7AkosAmyvL-hnCEtXrLFMsA.webp' },
 	{ id: 'smelling-salts', name: '농축 스멜링솔트', stage: 4, effect: '◇ 체력 70% 이상일 때 기절, 빙결 등 효과 면역<br>◆ 체력 40% 이상일 때 기절, 빙결 등 효과 면역', image: 'https://images.weserv.nl/?url=arknights1234.github.io/images/%E5%8D%AB%E6%88%8D%E5%8D%8F%E8%AE%AE_%E9%81%93%E5%85%B7_%E6%B5%93%E7%BC%A9%E5%97%85%E7%9B%90.png&output=webp' },
 	{ id: 'shield-drone', name: '보호막 드론', stage: 4, effect: '◇ 치료 시 10% 확률로 보호막 1겹 제공 (최대 1겹)<br>◆ 치료 시 15% 확률로 보호막 1겹 제공 (최대 1겹)', image: 'https://images.weserv.nl/?url=arknights1234.github.io/images/%E5%8D%AB%E6%88%8D%E5%8D%8F%E8%AE%AE_%E9%81%93%E5%85%B7_%E6%8A%A4%E7%9B%BE%E6%97%A0%E4%BA%BA%E6%9C%BA.png&output=webp' },
 	{ id: 'm3-carapace', name: 'M3 견갑', stage: 4, effect: '◇ 전투 도중 쓰러지면 바로 부활 (한 전투 당 한 번 발동)<br>◆ 전투 도중 쓰러지면 바로 부활 (한 전투 당 두 번 발동)', image: 'https://images.weserv.nl/?url=arknights1234.github.io/images/%E5%8D%AB%E6%88%8D%E5%8D%8F%E8%AE%AE_%E9%81%93%E5%85%B7_M3%E8%8C%A7%E7%94%B2.png&output=webp' },
@@ -8172,7 +8532,30 @@ const tools = [
 	{ id: 'kjerag-tear', name: '쉐라간드의 눈물', stage: 6, effect: '마법 저항 +30(+50), 장착자가 [쉐라그]인 경우<br>해당 오퍼레이터가 적을 쓰러트리면 주변 일정 범위 내 기타 적들이 2초간 빙결<br><span style=\'color: gray;\'>쉐라그의 만년빙과 같이 장착할 시 적을 쓰러트리면 주변 일정 범위 내 추가로 2초간 빙결</span>', image: 'https://images.weserv.nl/?url=arknights1234.github.io/images/%E5%8D%AB%E6%88%8D%E5%8D%8F%E8%AE%AE_%E9%81%93%E5%85%B7_%E8%80%B6%E6%8B%89%E5%86%88%E5%BE%B7%E4%B9%8B%E6%B3%AA.png&output=webp' },
 	{ id: 'gold-sand-compass', name: '황금 모래 나침반', stage: 6, effect: '초기 SP +30(+50), 장착자가 [사르곤]인 경우<br>해당 오퍼레이터 스킬 종료 시 즉시 SP 30 회복<br><span style=\'color: gray;\'>사르곤 농축 차와 같이 장착할 시 스킬을 발동할 때마다 모든 [사르곤] 오퍼레이터가 SP 3(5) 회복</span>', image: 'https://images.weserv.nl/?url=arknights1234.github.io/images/%E5%8D%AB%E6%88%8D%E5%8D%8F%E8%AE%AE_%E9%81%93%E5%85%B7_%E9%BB%84%E6%B2%99%E7%BD%97%E7%9B%98.png&output=webp' },
 	{ id: 'hr-document', name: '인사부 문서', stage: 6, effect: '장착 시 소멸, 배치 가능 인원 수 9명으로 변경', image: 'https://images.weserv.nl/?url=arknights1234.github.io/images/%E5%8D%AB%E6%88%8D%E5%8D%8F%E8%AE%AE_%E9%81%93%E5%85%B7_%E4%BA%BA%E4%BA%8B%E9%83%A8%E6%96%87%E6%A1%A3.png&output=webp' },
-	{ id: 'isomorphic-body', name: '변형 구성체', stage: 6, effect: '장착자가 추가 맹약 획득 (같이 장착한 다른 도구에 따름)', image: 'https://images.weserv.nl/?url=arknights1234.github.io/images/%E5%8D%AB%E6%88%8D%E5%8D%8F%E8%AE%AE_%E9%81%93%E5%85%B7_%E5%8F%98%E5%BD%A2%E5%90%8C%E6%9E%84%E4%BD%93.png&output=webp' }
+	{ id: 'isomorphic-body', name: '변형 구성체', stage: 6, effect: '장착자가 추가 맹약 획득 (같이 장착한 다른 도구에 따름)', image: 'https://images.weserv.nl/?url=arknights1234.github.io/images/%E5%8D%AB%E6%88%8D%E5%8D%8F%E8%AE%AE_%E9%81%93%E5%85%B7_%E5%8F%98%E5%BD%A2%E5%90%8C%E6%9E%84%E4%BD%93.png&output=webp' },
+	{ id: 'knight-discipline', name: '기사 계율', stage: 6, effect: '◇ 재배치 시간 -40%, 장착자가 [카시미어]인 경우 스킬 발동 후 20초간 공격 범위 내 적의 공격 속도 -35%, 이동 속도 -35%<br>◆ 재배치 시간 -60%, 장착자가 [카시미어]인 경우 스킬 발동 후 20초간 공격 범위 내 적의 공격 속도 -35%, 이동 속도 -35%<br><span style=\'color: gray;\'>카시미어 경기 깃발과 같이 장착할 시 스킬 지속 시간 동안 공격력 +100%, 치명상을 입어도 퇴각하지 않으며 스킬 종료 후 사망</span>', image: 'https://i.namu.wiki/i/IwTCEf4cg1oWUAwm3yZVumC63IPwGjV2gtK3pTdrcGWWIEnIQGHuk3Tu6d2lcVeu_dAb7i7gTrIvjtVgcMeJVA.webp' },
+	{ id: 'family-badge', name: '패밀리 배지', stage: 6, effect: '◇ SP 자연 회복 속도 +0.2/초, 장착자가 [시라쿠사]인 경우 은신 상태일 시 공격력이 점진적으로 200%까지 증가, 은신 종료 후 최초로 피해를 입히거나 퇴각할 때까지 지속<br>◆ SP 자연 회복 속도 +0.35/초, 장착자가 [시라쿠사]인 경우 은신 상태일 시 공격력이 점진적으로 200%까지 증가, 은신 종료 후 최초로 피해를 입히거나 퇴각할 때까지 지속<br><span style=\'color: gray;\'>시라쿠사 정장과 같이 장착할 시 은신 종료 후 최초로 피해를 입힐 때 추가로 공격력의 800%에 해당하는 고정 피해</span>', image: 'https://i.namu.wiki/i/uxhlkNJRU8WLXTcShYkr_DhC0Og_zDirsDhY2fLmmk3S03tItIHPnBx5h-_b7cmK6YFdUgeJum09XqusJxbb0g.webp' }
+];
+
+
+const isomorphicRecipes = [
+	/* 핵심 맹약 */
+	{ toolId: 'yan-dagger', oath: '염국' },
+	{ toolId: 'sargon-tea', oath: '사르곤' },
+	{ toolId: 'victoria-hammer', oath: '빅토리아', label: '빅토리아식 망치 계열' },
+	{ toolId: 'kjerag-ice', oath: '쉐라그' },
+	{ toolId: 'laterano-clip', oath: '라테라노' },
+	{ toolId: 'aegir-anchor', oath: '에기르' },
+	{ toolId: 'siracusa-suit', oath: '시라쿠사' },
+	{ toolId: 'kazimierz-flag', oath: '카시미어' },
+
+	/* 부가 맹약 */
+	{ toolId: 'precision-scope', oath: '정밀' },
+	{ toolId: 'swift-ration', oath: '신속' },
+	{ toolId: 'pocket-circle', oath: '아케인' },
+	{ toolId: 'sturdy-shield', oath: '고수' },
+	{ toolId: 'raid-flashbang', oath: '기습' },
+	{ toolId: 'unyielding-launcher', oath: '불굴' }
 ];
 
 const state = {
@@ -8187,7 +8570,9 @@ const state = {
 	focusedOperator: null,
 	selectedStrategy: null,
 	toolSearch: '',
-	toolOrderAscending: false
+	toolOrderAscending: false,
+	isomorphicBonusOaths: [],
+	hrDocumentActive: false
 };
 
 const oathByName = new Map(oaths.map(oath => [oath.name, oath]));
@@ -8207,6 +8592,9 @@ const dom = {
 	clearSearch: document.querySelector('#clear-search'),
 	selectedTray: document.querySelector('#selected-operator-tray'),
 	selectedOperatorList: document.querySelector('#selected-operator-list'),
+	itemEffectTray: document.querySelector('#item-effect-tray'),
+	itemEffectList: document.querySelector('#item-effect-list'),
+	itemEffectCount: document.querySelector('#item-effect-count'),
 	coreFilter: document.querySelector('#core-filter'),
 	supportFilter: document.querySelector('#support-filter'),
 	stageFilter: document.querySelector('#stage-filter'),
@@ -8214,6 +8602,7 @@ const dom = {
 	clearFilters: document.querySelector('#clear-filters'),
 	operatorGrid: document.querySelector('#operator-grid'),
 	selectedCount: document.querySelector('#selected-count'),
+	selectedLimit: document.querySelector('#selected-limit'),
 	selectedCountBottom: document.querySelector('#selected-count-bottom'),
 	resetSelection: document.querySelector('#reset-selection'),
 	strategyList: document.querySelector('#strategy-list'),
@@ -8227,6 +8616,13 @@ const dom = {
 	toolSearch: document.querySelector('#tool-search'),
 	clearToolSearch: document.querySelector('#clear-tool-search'),
 	toolOrderToggle: document.querySelector('#tool-order-toggle'),
+	simOpenIsomorphic: document.querySelector('#sim-open-isomorphic'),
+	simToggleHr: document.querySelector('#sim-toggle-hr'),
+	isomorphicRecipeModal: document.querySelector('#isomorphic-recipe-modal'),
+	isomorphicRecipeGrid: document.querySelector('#isomorphic-recipe-grid'),
+	isomorphicRecipeClose: document.querySelector('#isomorphic-recipe-close'),
+	isomorphicRecipeEffectStrip: document.querySelector('#isomorphic-recipe-effect-strip'),
+	isomorphicRecipeEffectList: document.querySelector('#isomorphic-recipe-effect-list'),
 	mobileStrategyCurrent: document.querySelector('#mobile-strategy-current'),
 	mobileStrategyChange: document.querySelector('#mobile-strategy-change'),
 	strategyModal: document.querySelector('#strategy-modal'),
@@ -8711,22 +9107,113 @@ function renderOperators() {
 	}).join('');
 }
 
+
+function operatorSelectionLimit() {
+	return state.hrDocumentActive ? 9 : 8;
+}
+
+function renderEffectCards(target) {
+	if (!target) return;
+	const isoTool = tools.find(tool => tool.id === 'isomorphic-body');
+	target.innerHTML = state.isomorphicBonusOaths.map((oathName, index) => `
+		<button class="mobile-item-effect-card" data-effect-index="${index}" type="button" title="${oathName}+1 제거">
+			<div class="mobile-item-effect-image">${imageOrFallback(isoTool?.image || '', '변형 구성체')}</div>
+			<strong>${oathName}+1</strong>
+			<span class="mobile-effect-remove">×</span>
+		</button>
+	`).join('');
+}
+
+function renderItemEffects() {
+	const count = state.isomorphicBonusOaths.length;
+	if (dom.itemEffectTray) dom.itemEffectTray.hidden = count === 0;
+	if (dom.itemEffectCount) dom.itemEffectCount.textContent = `${count}/9 · 탭하면 제거`;
+	renderEffectCards(dom.itemEffectList);
+	if (dom.isomorphicRecipeEffectStrip) dom.isomorphicRecipeEffectStrip.hidden = count === 0;
+	renderEffectCards(dom.isomorphicRecipeEffectList);
+}
+
+function renderIsomorphicRecipeGrid() {
+	if (!dom.isomorphicRecipeGrid) return;
+	let lastType = '';
+	dom.isomorphicRecipeGrid.innerHTML = isomorphicRecipes.map(recipe => {
+		const tool = tools.find(entry => entry.id === recipe.toolId);
+		const oath = oathByName.get(recipe.oath);
+		if (!tool || !oath) return '';
+		const type = oath.type === 'core' ? 'core' : 'support';
+		const appliedCount = state.isomorphicBonusOaths.filter(name => name === recipe.oath).length;
+		const section = type !== lastType
+			? `<div class="recipe-group-label ${type}">${type === 'core' ? '핵심 맹약' : '부가 맹약'}</div>`
+			: '';
+		lastType = type;
+		return `${section}
+			<button class="mobile-recipe-item${appliedCount ? ' active' : ''}" data-isomorphic-oath="${recipe.oath}" data-stage="${tool.stage}" type="button">
+				<div class="mobile-recipe-image">${imageOrFallback(tool.image, tool.name)}</div>
+				<div class="mobile-recipe-copy"><strong>${recipe.label || tool.name}</strong><span>→ ${recipe.oath}${appliedCount ? ` +${appliedCount}` : ''}</span></div>
+			</button>`;
+	}).join('');
+}
+
+function addIsomorphicBonus(oathName) {
+	if (state.isomorphicBonusOaths.length >= 9) {
+		alert('변형 구성체 효과는 최대 9개까지 추가할 수 있습니다.');
+		return;
+	}
+	state.isomorphicBonusOaths.push(oathName);
+	renderSelectionState();
+	renderIsomorphicRecipeGrid();
+}
+
+function removeIsomorphicBonus(index) {
+	if (!Number.isInteger(index) || index < 0 || index >= state.isomorphicBonusOaths.length) return;
+	state.isomorphicBonusOaths.splice(index, 1);
+	renderSelectionState();
+	renderIsomorphicRecipeGrid();
+}
+
+function openIsomorphicRecipe() {
+	renderItemEffects();
+	renderIsomorphicRecipeGrid();
+	setModalOpen(dom.isomorphicRecipeModal, true);
+}
+
+function closeIsomorphicRecipe() {
+	setModalOpen(dom.isomorphicRecipeModal, false);
+}
+
+function toggleHrDocumentEffect() {
+	if (state.hrDocumentActive && state.selectedOperators.size > 8) {
+		alert('인사부 문서를 해제하려면 오퍼레이터를 8명 이하로 줄여주세요.');
+		return false;
+	}
+	state.hrDocumentActive = !state.hrDocumentActive;
+	renderSelectionState();
+	renderTools();
+	return true;
+}
+
 function renderSelectedTray() {
 	const selected = [...state.selectedOperators]
 		.map(id => operators.find(operator => operator.id === id))
 		.filter(Boolean);
+	const hrTool = tools.find(tool => tool.id === 'hr-document');
+	const hasAny = selected.length > 0 || state.hrDocumentActive;
 
-	// Keep the tray in place even at 0/8 so the filters never jump vertically.
 	dom.selectedTray.hidden = false;
-	dom.selectedOperatorList.classList.toggle('is-empty', selected.length === 0);
-	dom.selectedOperatorList.innerHTML = selected.length
+	dom.selectedOperatorList.classList.toggle('is-empty', !hasAny);
+	dom.selectedOperatorList.innerHTML = hasAny
 		? selected.map(operator => `
 			<button class="selected-operator-item" data-selected-operator-id="${operator.id}" data-stage="${operator.stage}" type="button" title="${operator.name} 선택 해제">
 				<div class="selected-operator-image">${operatorImageOrFallback(operator)}</div>
 				<strong>${operator.name}</strong>
 				<span class="selected-remove-mark">×</span>
 			</button>
-		`).join('')
+		`).join('') + (state.hrDocumentActive ? `
+			<button class="selected-operator-item selected-hr-document-item" data-selected-hr-document="true" data-stage="6" type="button" title="인사부 문서 효과 해제">
+				<div class="selected-operator-image">${imageOrFallback(hrTool?.image || '', '인사부 문서')}</div>
+				<strong>배치 9명</strong>
+				<span class="selected-remove-mark">×</span>
+			</button>` : '')
 		: '<div class="selected-tray-empty">선택한 오퍼레이터 없음</div>';
 }
 
@@ -8792,7 +9279,7 @@ function toggleOperatorSelection(operator) {
 		state.selectedOperators.delete(operator.id);
 		return true;
 	}
-	if (state.selectedOperators.size >= 8) return false;
+	if (state.selectedOperators.size >= operatorSelectionLimit()) return false;
 	state.selectedOperators.add(operator.id);
 	return true;
 }
@@ -8964,6 +9451,8 @@ function closeResetConfirm() {
 function performFullReset() {
 	state.selectedOperators.clear();
 	state.bannedOperators.clear();
+	state.isomorphicBonusOaths = [];
+	state.hrDocumentActive = false;
 	state.focusedOperator = null;
 	focusOperator(null);
 	renderSelectionState();
@@ -8979,6 +9468,9 @@ function getOathCounts() {
 		for (const oathName of operator.oaths) {
 			counts.set(oathName, (counts.get(oathName) || 0) + 1);
 		}
+	}
+	for (const oathName of state.isomorphicBonusOaths) {
+		counts.set(oathName, (counts.get(oathName) || 0) + 1);
 	}
 	return counts;
 }
@@ -9116,9 +9608,16 @@ function renderSelectionState() {
 	const anchorTopBefore = anchorBefore ? anchorBefore.getBoundingClientRect().top : null;
 	const previousScrollY = preserveViewport ? window.scrollY : 0;
 	const count = state.selectedOperators.size;
+	const limit = operatorSelectionLimit();
 	dom.selectedCount.textContent = count;
+	if (dom.selectedLimit) dom.selectedLimit.textContent = `/ ${limit}`;
 	if (dom.selectedCountBottom) dom.selectedCountBottom.textContent = count;
-	if (dom.mobileDockCount) dom.mobileDockCount.textContent = `${count}/8`;
+	if (dom.mobileDockCount) dom.mobileDockCount.textContent = `${count}/${limit}`;
+	if (dom.simToggleHr) {
+		dom.simToggleHr.classList.toggle('active', state.hrDocumentActive);
+		dom.simToggleHr.setAttribute('aria-pressed', state.hrDocumentActive ? 'true' : 'false');
+		dom.simToggleHr.textContent = state.hrDocumentActive ? '인사부 ✓' : '인사부 +';
+	}
 	const counts = getOathCounts();
 	const activeOaths = [...counts.entries()].filter(([name, oathCount]) => {
 		const oath = oathByName.get(name);
@@ -9128,6 +9627,8 @@ function renderSelectionState() {
 	refreshBanSelectionState();
 	renderOperators();
 	renderSelectedTray();
+	renderItemEffects();
+	if (dom.isomorphicRecipeModal?.classList.contains('is-open')) renderIsomorphicRecipeGrid();
 	renderOathStatus();
 	if (preserveViewport) {
 		requestAnimationFrame(() => {
@@ -9258,6 +9759,8 @@ function renderTools() {
 								<h4>${tool.name}</h4>
 								<span class="tool-detail-label">상세 효과</span>
 								<p>${tool.detailEffect || tool.effect}</p>
+								${tool.id === 'isomorphic-body' ? '<button class="mobile-tool-action" data-tool-action="isomorphic" type="button">조합법 보기</button>' : ''}
+								${tool.id === 'hr-document' ? `<button class="mobile-tool-action${state.hrDocumentActive ? ' active' : ''}" data-tool-action="hr" type="button">${state.hrDocumentActive ? '효과 해제' : '효과 적용'}</button>` : ''}
 							</div>
 						</article>
 					`).join('')}
@@ -9289,12 +9792,14 @@ function switchTab(tab) {
 function composeMobileSimulator() {
 	const workspace = document.querySelector('.operator-workspace');
 	const workspaceHead = workspace?.querySelector('.workspace-head');
+	const actionRow = workspace?.querySelector('.mobile-sim-action-row');
 	const oathPanel = document.querySelector('.oath-status-panel');
-	if (!workspace || !workspaceHead || !oathPanel) return;
+	if (!workspace || !workspaceHead || !actionRow || !oathPanel) return;
 
-	// Mobile reading order: strategy -> selected operators -> related oaths -> search/filter -> roster.
-	workspaceHead.insertAdjacentElement('afterend', dom.selectedTray);
-	dom.selectedTray.insertAdjacentElement('afterend', oathPanel);
+	// Mobile reading order: title -> quick actions -> selected operators -> related oaths -> search/filter -> roster.
+	actionRow.insertAdjacentElement('afterend', dom.selectedTray);
+	dom.selectedTray.insertAdjacentElement('afterend', dom.itemEffectTray);
+	dom.itemEffectTray.insertAdjacentElement('afterend', oathPanel);
 	oathPanel.classList.add('mobile-inline-oath');
 }
 
@@ -9338,12 +9843,42 @@ function bindEvents() {
 		});
 	}
 
+	if (dom.toolSections) {
+		dom.toolSections.addEventListener('click', event => {
+			const action = event.target.closest('[data-tool-action]');
+			if (!action) return;
+			if (action.dataset.toolAction === 'isomorphic') openIsomorphicRecipe();
+			if (action.dataset.toolAction === 'hr' && toggleHrDocumentEffect()) switchTab('sim');
+		});
+	}
+	if (dom.simOpenIsomorphic) dom.simOpenIsomorphic.addEventListener('click', openIsomorphicRecipe);
+	if (dom.simToggleHr) dom.simToggleHr.addEventListener('click', toggleHrDocumentEffect);
+	if (dom.isomorphicRecipeClose) dom.isomorphicRecipeClose.addEventListener('click', closeIsomorphicRecipe);
+	if (dom.isomorphicRecipeModal) {
+		dom.isomorphicRecipeModal.addEventListener('click', event => {
+			if (event.target === dom.isomorphicRecipeModal) closeIsomorphicRecipe();
+		});
+	}
+	if (dom.isomorphicRecipeGrid) {
+		dom.isomorphicRecipeGrid.addEventListener('click', event => {
+			const item = event.target.closest('[data-isomorphic-oath]');
+			if (item) addIsomorphicBonus(item.dataset.isomorphicOath);
+		});
+	}
+	for (const effectList of [dom.itemEffectList, dom.isomorphicRecipeEffectList]) {
+		if (!effectList) continue;
+		effectList.addEventListener('click', event => {
+			const item = event.target.closest('[data-effect-index]');
+			if (item) removeIsomorphicBonus(Number(item.dataset.effectIndex));
+		});
+	}
+
 	if (dom.mobileStrategyChange) dom.mobileStrategyChange.addEventListener('click', openStrategyModal);
 	if (dom.operatorDetailClose) dom.operatorDetailClose.addEventListener('click', closeOperatorDetail);
 	if (dom.oathDetailClose) dom.oathDetailClose.addEventListener('click', () => setModalOpen(dom.oathDetailModal, false));
 	if (dom.mobileDockReset) dom.mobileDockReset.addEventListener('click', openResetConfirm);
 
-	for (const modal of [dom.strategyModal, dom.operatorModal, dom.oathDetailModal]) {
+	for (const modal of [dom.strategyModal, dom.operatorModal, dom.oathDetailModal, dom.isomorphicRecipeModal]) {
 		if (!modal) continue;
 		modal.addEventListener('click', event => {
 			if (event.target !== modal) return;
@@ -9353,8 +9888,9 @@ function bindEvents() {
 
 	document.addEventListener('keydown', event => {
 		if (event.key !== 'Escape') return;
-		for (const modal of [dom.strategyModal, dom.operatorModal, dom.oathDetailModal]) setModalOpen(modal, false);
+		for (const modal of [dom.strategyModal, dom.operatorModal, dom.oathDetailModal, dom.isomorphicRecipeModal]) setModalOpen(modal, false);
 		closeResetConfirm();
+		closeIsomorphicRecipe();
 		closeBanScreen();
 	});
 
@@ -9398,6 +9934,10 @@ function bindEvents() {
 	dom.selectedOperatorList.addEventListener('click', event => {
 		const item = event.target.closest('.selected-operator-item');
 		if (!item) return;
+		if (item.dataset.selectedHrDocument === 'true') {
+			toggleHrDocumentEffect();
+			return;
+		}
 		const operator = operators.find(entry => entry.id === item.dataset.selectedOperatorId);
 		if (!operator) return;
 		state.selectedOperators.delete(operator.id);
@@ -9531,6 +10071,8 @@ function init() {
 	renderFilters();
 	renderOperators();
 	renderSelectedTray();
+	renderItemEffects();
+	renderIsomorphicRecipeGrid();
 	renderStrategies();
 	renderMobileStrategyBar();
 	renderOathStatus();
